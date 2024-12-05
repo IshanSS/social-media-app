@@ -3,8 +3,6 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 const { JWT_SECRET } = require("../config/index");
 
-console.log("JWT_SECRET:", JWT_SECRET); // Add this line to debug
-
 /*
     @decs Register new user
     @routes POST /api/auth/register
@@ -14,25 +12,22 @@ const registerUser = async (req, res) => {
   const { name, email, password } = req.body;
 
   try {
-    if (!name) {
-      return res
-        .status(400)
-        .json({ status: "Failed", message: "Please enter your full name" });
+    if (!name || !email || !password) {
+      return res.status(400).json({
+        status: "Failed",
+        message: "Please fill all fields",
+      });
     }
 
-    if (name == "" || email == "" || password == "") {
-      return res
-        .status(400)
-        .json({ status: "Failed", message: "Please fill all fields" });
-    } else if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
+    if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
       return res.status(400).json({
         status: "Failed",
         message: "Invalid email address",
       });
     }
 
-    const userAvaibale = await User.findOne({ email });
-    if (userAvaibale) {
+    const userAvailable = await User.findOne({ email });
+    if (!userAvailable) {
       return res.status(400).json({
         status: "Failed",
         message: "Email already exists",
@@ -40,15 +35,12 @@ const registerUser = async (req, res) => {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    console.log(hashedPassword);
 
     const user = await User.create({
       name,
       email,
       password: hashedPassword,
     });
-
-    console.log(`User created: ${user}`);
 
     if (user) {
       res.status(200).json({
@@ -62,6 +54,12 @@ const registerUser = async (req, res) => {
       });
     }
   } catch (err) {
+    if (err.code === 11000) {
+      return res.status(400).json({
+        status: "Failed",
+        message: "Email already exists",
+      });
+    }
     res.status(500).json({ status: "Failed", message: err.message });
   }
 };

@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./styles/Profile.css";
 
 const Profile = () => {
   const [user, setUser] = useState(null); // Initialize user as null
   const [loading, setLoading] = useState(true); // Add loading state
   const [error, setError] = useState(null); // Add error state
+  const navigate = useNavigate(); // Initialize useNavigate
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -43,6 +45,18 @@ const Profile = () => {
     fetchProfile();
   }, []);
 
+  const handleNewPost = () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      setError("No token found. Please log in.");
+      return;
+    }
+
+    navigate("/new-post", {
+      state: { token },
+    });
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -70,7 +84,9 @@ const Profile = () => {
       </div>
       <div className="profile-actions">
         <button className="btn edit-btn">Edit Profile</button>
-        <button className="btn new-post-btn">Add New Post</button>
+        <button className="btn new-post-btn" onClick={handleNewPost}>
+          Add New Post
+        </button>
       </div>
       <div className="profile-posts">
         <h2>Your Posts</h2>
