@@ -5,11 +5,36 @@ const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false); // Add state for password visibility
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
     console.log("Register Attempted:", { name, email, password });
-    // Call backend API for registration
+
+    try {
+      const response = await fetch("http://localhost:3015/api/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, email, password }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Registration Successful:", data);
+        // Handle successful registration (e.g., redirect to login page)
+      } else {
+        const errorData = await response.json();
+        console.error("Registration Failed:", errorData);
+        alert(`Registration failed: ${errorData.message || "Unknown error"}`);
+        // Handle registration failure (e.g., show error message)
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert(`Error: ${error.message}`);
+      // Handle network or other errors
+    }
   };
 
   return (
@@ -39,13 +64,22 @@ const Register = () => {
           </div>
           <div className="input-group">
             <label>Password</label>
-            <input
-              type="password"
-              placeholder="Enter your password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
+            <div className="password-container">
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Enter your password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+              <button
+                type="button"
+                className="toggle-password"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? "Hide" : "Show"}
+              </button>
+            </div>
           </div>
           <button type="submit" className="register-btn">
             Register
