@@ -1,0 +1,143 @@
+/* Center the container */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fbc2eb);
+}
+
+/* Card styling */
+.login-card {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Card heading */
+.login-card h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: #4a4a4a;
+}
+
+/* Form labels and inputs */
+.input-group {
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+.input-group label {
+  display: block;
+  font-size: 0.9rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 0.8rem;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+  transition: 0.3s;
+}
+
+/* Focus effect for inputs */
+.input-group input:focus {
+  outline: none;
+  border-color: #4a90e2;
+  box-shadow: 0 0 4px rgba(74, 144, 226, 0.3);
+}
+
+/* Register button */
+.login-btn {
+  width: 100%;
+  padding: 0.8rem;
+  background: #4a90e2;
+  color: #fff;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: background 0.3s ease-in-out;
+}
+
+.login-btn:hover {
+  background: #357abd;
+}
+
+/* Signup/Redirect link */
+.signup-redirect {
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.signup-redirect a {
+  color: #4a90e2;
+  text-decoration: none;
+}
+
+.signup-redirect a:hover {
+  text-decoration: underline;
+}
+
+/* Register container */
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fbc2eb);
+}
+
+/* Register card styling */
+.register-card {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Register button */
+.register-btn {
+  width: 100%;
+  padding: 0.8rem;
+  background: #4a90e2;
+  color: #fff;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: background 0.3s ease-in-out;
+}
+
+.register-btn:hover {
+  background: #357abd;
+}
+
+/* Login/Redirect link */
+.login-redirect {
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.login-redirect a {
+  color: #4a90e2;
+  text-decoration: none;
+}
+
+.login-redirect a:hover {
+  text-decoration: underline;
+}
