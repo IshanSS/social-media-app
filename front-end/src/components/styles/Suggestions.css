@@ -1,0 +1,32 @@
+.suggestions {
+  width: 20%;
+  margin-left: 75%;
+  padding: 1rem;
+  position: fixed;
+}
+
+.suggestions-header {
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.suggestion {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.suggestion-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.follow-btn {
+  background-color: #0095f6;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+}

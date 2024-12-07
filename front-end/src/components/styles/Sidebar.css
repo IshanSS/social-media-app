@@ -1,0 +1,25 @@
+.sidebar {
+  width: 20%;
+  background-color: #000;
+  color: #fff;
+  height: 100vh;
+  padding: 1rem;
+  position: fixed;
+}
+
+.sidebar-logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+}
+
+.sidebar-menu {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar-menu li {
+  margin: 1rem 0;
+  font-size: 1.2rem;
+  cursor: pointer;
+}

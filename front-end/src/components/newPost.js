@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
-import "./styles/newPost.css"; // Create this CSS file for styling
+import { useLocation, useNavigate } from "react-router-dom";
+import "./styles/Newpost.css"; // Create this CSS file for styling
 
 const NewPost = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [image, setImage] = useState(null);
   const location = useLocation();
+  const navigate = useNavigate(); // Initialize useNavigate
   const token = location.state?.token;
 
   const handleSubmit = async (e) => {
@@ -32,6 +33,8 @@ const NewPost = () => {
       if (response.ok) {
         const data = await response.json();
         console.log("Post created successfully:", data);
+        // Navigate to profile page
+        navigate("/profile");
         // Reset form fields
         setTitle("");
         setContent("");

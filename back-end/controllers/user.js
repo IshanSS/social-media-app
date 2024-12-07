@@ -27,7 +27,7 @@ const registerUser = async (req, res) => {
     }
 
     const userAvailable = await User.findOne({ email });
-    if (!userAvailable) {
+    if (userAvailable) {
       return res.status(400).json({
         status: "Failed",
         message: "Email already exists",
