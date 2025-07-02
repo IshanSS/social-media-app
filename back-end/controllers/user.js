@@ -72,20 +72,14 @@ const registerUser = async (req, res) => {
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
 
-  console.log("Email:", email); // Add this line to debug
-  console.log("Password:", password); // Add this line to debug
-
   try {
-    const user = await User.findOne({ email }).select("+password"); // Select the password field
+    const user = await User.findOne({ email }).select("+password");
     if (!user) {
       return res.status(400).json({
         status: "Failed",
         message: "User not found",
       });
     }
-
-    console.log("User found:", user); // Add this line to debug
-    console.log("User password:", user.password); // Add this line to debug
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
@@ -103,7 +97,7 @@ const loginUser = async (req, res) => {
         email: user.email,
         id: user._id,
       },
-      JWT_SECRET, // Ensure JWT_SECRET is correctly passed here
+      JWT_SECRET,
       {
         expiresIn: "7d",
       }
@@ -138,4 +132,20 @@ const getUserProfile = async (req, res) => {
   }
 };
 
-module.exports = { registerUser, loginUser, getUserProfile };
+/*
+  @desc Logout user
+  @route POST /api/auth/logout
+  @access Private
+*/
+const logoutUser = async (req, res) => {
+  try {
+    res.status(200).json({
+      status: "Success",
+      message: "Logged out successfully",
+    });
+  } catch (err) {
+    res.status(500).json({ status: "Failed", message: err.message });
+  }
+};
+
+module.exports = { registerUser, loginUser, getUserProfile, logoutUser };
